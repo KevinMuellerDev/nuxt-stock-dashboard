@@ -1,0 +1,35 @@
+
+
+body {
+    margin: 0;
+    font-family: 'Rubik';
+}
+
+#app {
+    background: radial-gradient(71.11% 100% at 50% 0%, #020204 14.6%, #011F35 100%);
+    width: 100dvw;
+    min-height: 100dvh;
+}
+
+.head {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .half-elipse {
+        background: #39DAFF;
+        width: 96px;
+        height: 32px;
+        gap: 0px;
+        border-radius: 0px 100px 100px 0px;
+    }
+
+    h1{
+        font-weight: 500;
+        font-size: 36px;
+        color: #F9F9F9;
+    }
+}
