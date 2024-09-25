@@ -12,27 +12,64 @@
         </ul>
       </nav>
     </header>
-
+    <p>{{ currentContent }}</p>
     <main>
       <NuxtPage />
     </main>
-
     <footer>
       <p>&copy; 2024 Mein Unternehmen. Alle Rechte vorbehalten.</p>
     </footer>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App'
-}
+<script setup>
+import { useRoute } from 'vue-router';
+import { ref, watch } from 'vue';
+
+const route = useRoute();
+const currentContent = ref('Willkommen auf der Startseite!')
+document.title = "Home"
+
+const getContentByPath = (path) => {
+  switch (path) {
+    case '/':
+      return "Willkommen auf der Startseite"
+    case '/about':
+      return "Willkommen auf der Über uns Seite"
+    case '/contact':
+      return "Willkommen auf der Kontakt Seite"
+    default:
+      return "Seite nicht gefunden"
+  }
+};
+
+const getTitleByPath = (path) => {
+  switch (path) {
+    case '/':
+      return "Home"
+    case '/about':
+      return "Über uns"
+    case '/contact':
+      return "Kontakt"
+    default:
+      return "Seite nicht gefunden"
+  }
+};
+
+currentContent.value = getContentByPath(route.path);
+
+watch(() => route.path, (newPath) => {
+  currentContent.value = getContentByPath(newPath);
+  document.title = getTitleByPath(newPath);
+})
+
 </script>
 
 <style>
-body{
+body {
   margin: 0;
 }
+
 #app {
   font-family: Arial, sans-serif;
   margin: 0;
