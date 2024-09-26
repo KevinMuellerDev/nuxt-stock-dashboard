@@ -33,6 +33,9 @@ body {
 }
 
 .context {
+    display: flex;
+    flex-direction: column;
+    gap:32px;
     position: relative;
     top: 155px;
     left: 50%;
@@ -40,4 +43,18 @@ body {
     width: calc(100% - 32px);
     max-width: 1240px;
     padding: 0 16px;
+
+    .ctx-mid{
+        display: flex;
+        gap: 32px;
+        width: 100%;
+        height: 252px;
+    }
+
+    .ctx-bottom{
+        display: flex;
+        gap: 32px;
+        width: 100%;
+        height: 196px;
+    }
 }

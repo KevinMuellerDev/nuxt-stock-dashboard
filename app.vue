@@ -5,11 +5,18 @@
       <h1>The Magnificent Seven Companies</h1>
     </div>
     <div class="context">
-      <CustomCard>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, accusamus aut dignissimos dicta nemo
-          maiores, magni eum qui nam cumque consequatur molestiae tenetur! Vel, voluptatibus tempore. Aliquid suscipit
-          dolorum voluptates!</p>
-      </CustomCard>
+      <div class="ctx-top">
+        <CustomCard />
+      </div>
+      <div class="ctx-mid">
+        <CustomCard />
+        <CustomCard />
+      </div>
+      <div class="ctx-bottom">
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+      </div>
     </div>
 
   </div>
@@ -17,11 +24,18 @@
 
 <script>
 import CustomCard from './components/CustomCard.vue';
+import { stockService } from './service/stockService';
 export default {
   name: 'App',
   components: {
     CustomCard
-  }
+  },
+
+  async created() {
+    this.data = await stockService.getRevenue('$AAPL');
+    console.log("Loaded following data:", this.data);
+
+  },
 }
 </script>
 
