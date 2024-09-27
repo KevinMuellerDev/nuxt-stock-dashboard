@@ -40,8 +40,8 @@ class StockService {
 
     async getRevenue(sheetName: string) {
         try {
-            const res = await this.fetchData(sheetName)
-            return order.map(key => res[3][key])
+            const data = await this.fetchData(sheetName)
+            return order.map(key => data[3][key])
         } catch (error) {
             console.error('Error getting Revenue Data:', error);
             return [];
