@@ -6,7 +6,9 @@
     </div>
     <div class="context">
       <div class="ctx-top">
-        <CustomCard />
+        <CustomCard >
+          <Widget v-for="company in companies">{{company.name}}</Widget>
+        </CustomCard>
       </div>
       <div class="ctx-mid">
         <CustomCard />
@@ -24,18 +26,28 @@
 
 <script>
 import CustomCard from './components/CustomCard.vue';
+import Widget from './components/Widget.vue'
 import { stockService } from './service/stockService';
+
+
+
 export default {
   name: 'App',
   components: {
-    CustomCard
+    CustomCard,
+    Widget
+  },
+  data(){
+    return{
+      companies:[]
+    }
   },
 
   async created() {
     this.data = await stockService.getRevenue('$AAPL');
     console.log("Loaded following data:", this.data);
-
-  },
+    this.companies = stockService.companies;
+  }
 }
 </script>
 

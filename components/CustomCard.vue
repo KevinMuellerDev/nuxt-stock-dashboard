@@ -16,6 +16,7 @@ console.log(widgetRevenue);
 
 <style scoped>
 .card {
+  display: flex;
   background: #011F35;
   padding: 20px 32px;
   gap: 20px;
