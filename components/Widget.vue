@@ -10,12 +10,16 @@
       </div>
       <div class="widg-rev-data">
         <div class="widg-rev-left">
-          <span v-if="revenue.length">{{ totalRevenue }}</span>
+          <span v-if="this.revenue.length">{{ lastRevenue }}</span>
           <span v-else>Lädt...</span>
         </div>
         <div class="widg-rev-right">
-          <span >test</span>
-          <span>Lädt...</span>
+          <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
+            revenueDiff }} </span>
+          <span v-else>Lädt...</span>
+          <span v-if="this.grossMargin.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
+            grossMarginDiff }} </span>
+          <span v-else>Lädt...</span>
         </div>
 
       </div>
@@ -36,16 +40,32 @@ export default {
   },
   data() {
     return {
-      revenue: []
+      revenue: [],
+      grossMargin: [],
+      colorValue: 0
     }
   },
   async created() {
     this.revenue = await stockService.getRevenue(this.companieData.abbreviation, this.companieData.revenueRow);
+    this.grossMargin = await stockService.getRevenue(this.companieData.abbreviation, this.companieData.grossMarginRow);
   },
   computed: {
-    totalRevenue() {
-      // Berechnet die Summe nur, wenn `companies` Daten hat
-      return ((this.revenue.reduce((acc, num) => acc + num, 0)) / this.revenue.length).toFixed(2);
+    lastRevenue() {
+      return this.revenue[this.revenue.length - 1];
+    },
+
+    revenueDiff() {
+      this.colorValue = (this.revenue[this.revenue.length - 1] - this.revenue[this.revenue.length - 2]).toFixed(2);
+      if (this.colorValue >= 0)
+        return ('+' + this.colorValue) + '\u{2191}'
+      return this.colorValue + ' \u{2193}';
+    },
+
+    grossMarginDiff() {
+      const marginDiff = (this.grossMargin[this.grossMargin.length - 1] - this.grossMargin[this.grossMargin.length - 2]).toFixed(2);
+      if (this.colorValue >= 0)
+        return ('+' + marginDiff) + '\u{0025}'
+      return marginDiff + ' \u{0025}';
     }
   }
 

@@ -35,7 +35,7 @@
         .widg-rev-data{
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
 
             .widg-rev-left{
                 font-size: 24px;
@@ -54,4 +54,12 @@
             font-weight: 400;
         }
     }
+  }
+
+  .green{
+    color:green!important
+  }
+
+  .red{
+    color:red!important
   }
