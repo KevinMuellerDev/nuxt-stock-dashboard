@@ -10,81 +10,82 @@ const order = [
     'Sep 22',
     'Dec 22',
     'Mar 23',
-    '3 Aug 23',
-    '2 Nov 23',
-    '1 Feb 24',
-    '2 Mai 24',
-    '1 Aug 24',
+    'Aug 23',
+    'Nov 23',
+    'Feb 24',
+    'Mai 24',
+    'Aug 24',
 ]
 
 const comp = [
     {
         "name": "Apple",
         "abbreviation": "$AAPL",
-        "logo":"/img/apple.png",
-        "revenueRow": 5,
-        "netIncomeRow": 36,
-        "grossMarginRow": 23
+        "logo": "/img/apple.png",
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     },
     {
         "name": "Amazon",
         "abbreviation": "$AMZN",
         "logo":"/img/amazon.png",
-        "revenueRow": 9,
-        "netIncomeRow": 41,
-        "grossMarginRow": 15
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     },
     {
         "name": "Alphabet",
         "abbreviation": "$GOOG",
         "logo":"/img/google.png",
-        "revenueRow": 5,
-        "netIncomeRow": 41,
-        "grossMarginRow": 25
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     },
     {
         "name": "Meta",
         "abbreviation": "$META",
         "logo":"/img/meta.png",
-        "revenueRow": 5,
-        "netIncomeRow": 27,
-        "grossMarginRow": 11
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     },
     {
         "name": "Microsoft",
         "abbreviation": "$MSFT",
         "logo":"./img/microsoft.png",
-        "revenueRow": 9,
-        "netIncomeRow": 30,
-        "grossMarginRow": 15
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     },
     {
         "name": "Nvidia",
         "abbreviation": "$NVDA",
         "logo":"/img/nvidia.png",
-        "revenueRow": 5,
-        "netIncomeRow": 29,
-        "grossMarginRow": 11
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     },
     {
         "name": "Tesla",
         "abbreviation": "$TSLA",
         "logo":"/img/tesla.png",
-        "revenueRow": 13,
-        "netIncomeRow": 44,
-        "grossMarginRow": 26
+        "revenueRow": 0,
+        "netIncomeRow": 1,
+        "grossMarginRow": 2
     }
+
 ]
 
 
 
 class StockService {
     apiClient: any;
-    companies:Object = comp;
+    companies: Object = comp;
 
     constructor() {
         this.apiClient = axios.create({
-            baseURL: 'https://sheetdb.io/api/v1/o3wy3fdhshi6m'
+            baseURL: 'https://nuxt-stock.free.beeceptor.com/'
         });
 
 
@@ -92,7 +93,7 @@ class StockService {
 
     async fetchData(sheetName: string) {
         try {
-            const response = await this.apiClient.get(`?sheet=${sheetName}`);
+            const response = await this.apiClient.get(`${sheetName}`);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -100,10 +101,13 @@ class StockService {
         }
     }
 
-    async getRevenue(sheetName: string) {
+    async getRevenue(sheetName: string, index: number) {
         try {
             const data = await this.fetchData(sheetName)
-            return order.map(key => data[3][key])
+            console.log(data[index]);
+            
+            return order.map(key => data[index][key])
+            
         } catch (error) {
             console.error('Error getting Revenue Data:', error);
             return [];

@@ -1,6 +1,6 @@
 .widg-outer-frame {
     background-color: #011F35;
-    width: Hug (173px)px;
+    min-width: 173px;
     height: Hug (143px)px;
     padding: 20px 24px ;
     gap: 8px;
@@ -11,14 +11,47 @@
         gap: 8px;
 
         img{
-            object-fit: cover;
-            width: 24px;
-            height: 24px;
+            max-width: 24px;
+            max-height: 24px;
         }
 
         h2{
             font-size: 20px;
             color: white;
+        }
+    }
+
+    .widg-content{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        color: white;
+        
+        .widg-rev-info{
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .widg-rev-data{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            .widg-rev-left{
+                font-size: 24px;
+                font-weight: 500;
+            }
+            
+            .widg-rev-right{
+                display: flex;
+                flex-direction: column;
+                font-size: 13px;
+            }
+        }
+
+        .widg-currency{
+            font-size: 8px;
+            font-weight: 400;
         }
     }
   }

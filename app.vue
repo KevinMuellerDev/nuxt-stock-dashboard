@@ -42,8 +42,6 @@ export default {
   },
 
   async created() {
-    this.data = await stockService.getRevenue('$AAPL');
-    console.log("Loaded following data:", this.data);
     this.companies = stockService.companies;
   }
 }

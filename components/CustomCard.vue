@@ -10,8 +10,7 @@ export default {
 };
 
 import { stockService } from '~/service/stockService';
-const widgetRevenue= await stockService.getRevenue('$AAPL')
-console.log(widgetRevenue);
+
 </script>
 
 <style scoped>
