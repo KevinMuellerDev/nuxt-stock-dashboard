@@ -6,9 +6,7 @@
     </div>
     <div class="context">
       <div class="ctx-top">
-        <CustomCard >
-          <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
-        </CustomCard>
+        <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
       </div>
       <div class="ctx-mid">
         <CustomCard />
@@ -29,7 +27,7 @@ import CustomCard from './components/CustomCard.vue';
 import Widget from './components/Widget.vue'
 import { stockService } from './service/stockService';
 
-let companies=[];
+let companies = [];
 
 export default {
   name: 'App',
@@ -37,9 +35,9 @@ export default {
     CustomCard,
     Widget
   },
-  data(){
-    return{
-      companies:[]
+  data() {
+    return {
+      companies: []
     }
   },
 

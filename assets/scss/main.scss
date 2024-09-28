@@ -1,6 +1,6 @@
 body {
     margin: 0;
-
+    font-family: "Rubik";
 }
 
 #app {
@@ -45,6 +45,14 @@ body {
     max-width: 1240px;
     padding: 0 16px;
 
+    .ctx-top{
+        display: flex;
+        background: #023A6233;
+        padding: 20px 32px;
+        gap: 20px;
+        border-radius: 16px;
+        width: calc(100% - 64px);
+    }
     .ctx-mid{
         display: flex;
         gap: 32px;

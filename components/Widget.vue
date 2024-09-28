@@ -1,6 +1,10 @@
 <template>
-  <div class="card">
-    <img :src="companieData.logo" alt="">
+  <div class="widg-outer-frame">
+    <div class="widg-title">
+      <img :src="companieData.logo" alt="">
+      <h2>{{ companieData.name }}</h2>
+    </div>
+
   </div>
 </template>
 
@@ -16,13 +20,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.card {
-  display: flex;
-  background: #011F35;
-  padding: 20px 32px;
-  gap: 20px;
-  border-radius: 16px;
-  width: calc(100% - 64px);
-}
+<style scoped lang="scss">
+  @use "~/assets/scss/widget.scss"
 </style>
