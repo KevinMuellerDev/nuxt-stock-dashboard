@@ -21,6 +21,7 @@ const comp = [
     {
         "name": "Apple",
         "abbreviation": "$AAPL",
+        "logo":"/img/apple.png",
         "revenueRow": 5,
         "netIncomeRow": 36,
         "grossMarginRow": 23
@@ -28,6 +29,7 @@ const comp = [
     {
         "name": "Amazon",
         "abbreviation": "$AMZN",
+        "logo":"/img/amazon.png",
         "revenueRow": 9,
         "netIncomeRow": 41,
         "grossMarginRow": 15
@@ -35,6 +37,7 @@ const comp = [
     {
         "name": "Alphabet",
         "abbreviation": "$GOOG",
+        "logo":"/img/google.png",
         "revenueRow": 5,
         "netIncomeRow": 41,
         "grossMarginRow": 25
@@ -42,6 +45,7 @@ const comp = [
     {
         "name": "Meta",
         "abbreviation": "$META",
+        "logo":"/img/meta.png",
         "revenueRow": 5,
         "netIncomeRow": 27,
         "grossMarginRow": 11
@@ -49,6 +53,7 @@ const comp = [
     {
         "name": "Microsoft",
         "abbreviation": "$MSFT",
+        "logo":"./img/microsoft.png",
         "revenueRow": 9,
         "netIncomeRow": 30,
         "grossMarginRow": 15
@@ -56,6 +61,7 @@ const comp = [
     {
         "name": "Nvidia",
         "abbreviation": "$NVDA",
+        "logo":"/img/nvidia.png",
         "revenueRow": 5,
         "netIncomeRow": 29,
         "grossMarginRow": 11
@@ -63,6 +69,7 @@ const comp = [
     {
         "name": "Tesla",
         "abbreviation": "$TSLA",
+        "logo":"/img/tesla.png",
         "revenueRow": 13,
         "netIncomeRow": 44,
         "grossMarginRow": 26
