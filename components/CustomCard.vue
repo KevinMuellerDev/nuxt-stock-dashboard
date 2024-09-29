@@ -18,7 +18,6 @@ import { stockService } from '~/service/stockService';
   position: relative;
   background: #011F35;
   padding: 20px 32px;
-
   border-radius: 16px;
   width: calc(100% - 64px);
 }
