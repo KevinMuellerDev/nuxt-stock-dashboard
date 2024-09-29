@@ -15,10 +15,10 @@ import { stockService } from '~/service/stockService';
 
 <style scoped>
 .card {
-  display: flex;
+  position: relative;
   background: #011F35;
   padding: 20px 32px;
-  gap: 20px;
+
   border-radius: 16px;
   width: calc(100% - 64px);
 }

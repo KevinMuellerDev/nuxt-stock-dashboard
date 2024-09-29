@@ -17,7 +17,7 @@
           <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
             revenueDiff }} </span>
           <span v-else>Lädt...</span>
-          <span v-if="this.grossMargin.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
+          <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
             grossMarginDiff }} </span>
           <span v-else>Lädt...</span>
         </div>
@@ -41,13 +41,12 @@ export default {
   data() {
     return {
       revenue: [],
-      grossMargin: [],
+      percentageDifference: 0,
       colorValue: 0
     }
   },
   async created() {
     this.revenue = await stockService.getRevenue(this.companieData.abbreviation, this.companieData.revenueRow);
-    this.grossMargin = await stockService.getRevenue(this.companieData.abbreviation, this.companieData.grossMarginRow);
   },
   computed: {
     lastRevenue() {
@@ -62,10 +61,12 @@ export default {
     },
 
     grossMarginDiff() {
-      const marginDiff = (this.grossMargin[this.grossMargin.length - 1] - this.grossMargin[this.grossMargin.length - 2]).toFixed(2);
-      if (this.colorValue >= 0)
-        return ('+' + marginDiff) + '\u{0025}'
-      return marginDiff + ' \u{0025}';
+      const absoluteDifference = (this.revenue[this.revenue.length - 1] - this.revenue[this.revenue.length - 2]).toFixed(2);      
+      this.percentageDifference = ((absoluteDifference / this.revenue[this.revenue.length - 2]) * 100).toFixed(2);
+      if (absoluteDifference >= 0) {
+        return `+${this.percentageDifference} \u{0025}`;
+      }
+      return `${this.percentageDifference} \u{0025}`;
     }
   }
 

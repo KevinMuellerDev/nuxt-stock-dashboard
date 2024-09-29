@@ -9,7 +9,9 @@
         <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
       </div>
       <div class="ctx-mid">
-        <CustomCard />
+        <CustomCard>
+          <LineChart v-if="this.netIncome.length == 7" :netIncome=this.netIncome />
+        </CustomCard>
         <CustomCard />
       </div>
       <div class="ctx-bottom">
@@ -26,25 +28,37 @@
 import CustomCard from './components/CustomCard.vue';
 import Widget from './components/Widget.vue'
 import { stockService } from './service/stockService';
+import LineChart from './components/LineChart.vue';
 
-let companies = [];
+let companies;
 
+useHead({
+  title: "title"
+})
 export default {
+
   name: 'App',
   components: {
     CustomCard,
-    Widget
+    Widget,
   },
   data() {
     return {
-      companies: []
+      companies: [],
+      netIncome: []
     }
   },
 
   async created() {
-    this.companies = stockService.companies;
+    this.companies = await stockService.companies;
+    this.companies.forEach(async abbr => {
+      const data = await stockService.getRevenue(abbr.abbreviation,abbr.netIncomeRow);
+      this.netIncome.push(data)
+    });
   }
 }
+
+
 </script>
 
 <style lang="scss">

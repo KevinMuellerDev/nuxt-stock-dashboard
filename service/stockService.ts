@@ -1,22 +1,5 @@
 import axios from 'axios';
 
-const order = [
-    'Mar 21',
-    'Jun 21',
-    'Sep 21',
-    'Dec 21',
-    'Mar 22',
-    'Jun 22',
-    'Sep 22',
-    'Dec 22',
-    'Mar 23',
-    'Aug 23',
-    'Nov 23',
-    'Feb 24',
-    'Mai 24',
-    'Aug 24',
-]
-
 const comp = [
     {
         "name": "Apple",
@@ -35,7 +18,7 @@ const comp = [
         "grossMarginRow": 2
     },
     {
-        "name": "Alphabet",
+        "name": "Google",
         "abbreviation": "$GOOG",
         "logo":"/img/google.png",
         "revenueRow": 0,
@@ -82,6 +65,22 @@ const comp = [
 class StockService {
     apiClient: any;
     companies: Object = comp;
+    order = [
+        'Mar 21',
+        'Jun 21',
+        'Sep 21',
+        'Dec 21',
+        'Mar 22',
+        'Jun 22',
+        'Sep 22',
+        'Dec 22',
+        'Mar 23',
+        'Aug 23',
+        'Nov 23',
+        'Feb 24',
+        'Mai 24',
+        'Aug 24',
+    ]
 
     constructor() {
         this.apiClient = axios.create({
@@ -106,7 +105,7 @@ class StockService {
             const data = await this.fetchData(sheetName)
             console.log(data[index]);
             
-            return order.map(key => data[index][key])
+            return this.order.map(key => data[index][key])
             
         } catch (error) {
             console.error('Error getting Revenue Data:', error);
