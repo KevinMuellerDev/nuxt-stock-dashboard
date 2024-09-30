@@ -3,7 +3,7 @@
     <Line :data="data" :options="options" />
 </template>
 
-<script>
+<script lang="ts">
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -13,7 +13,9 @@ import {
     Title,
     Tooltip,
     Legend,
-    plugins
+    plugins,
+    type ChartOptions,
+    type ChartData,
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import { stockService } from '~/service/stockService';
@@ -27,6 +29,7 @@ ChartJS.register(
     Tooltip,
     Legend
 )
+
 
 export default {
     name: 'App',
@@ -52,7 +55,7 @@ export default {
                     { label: 'Nvidia', backgroundColor: 'rgba(17, 84, 111, 1)', data: this.netIncome[5], borderColor: 'rgba(17, 84, 111, 1)', borderWidth: 1, tension: 0.5 },
                     { label: 'Tesla', backgroundColor: 'rgba(9, 58, 82, 1)', data: this.netIncome[6], borderColor: 'rgba(9, 58, 82, 1)', borderWidth: 1, tension: 0.5 },
                 ]
-            },
+            } as ChartData<'line'>,
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
@@ -61,7 +64,7 @@ export default {
                         position: 'right'
                     }
                 }
-            }
+            } as ChartOptions<'line'>
         }
     },
     async created() {

@@ -10,7 +10,7 @@
       </div>
       <div class="ctx-mid">
         <CustomCard>
-          <LineChart v-if="this.netIncome.length == 7" :netIncome=this.netIncome />
+          <LineChart v-if="netIncome.length == 7" :netIncome=netIncome />
         </CustomCard>
         <CustomCard />
       </div>
@@ -24,33 +24,39 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import CustomCard from './components/CustomCard.vue';
 import Widget from './components/Widget.vue'
 import { stockService } from './service/stockService';
-import LineChart from './components/LineChart.vue';
 
-let companies;
 
 useHead({
   title: "title"
 })
-export default {
 
+interface Company {
+  abbreviation: string;
+  netIncomeRow: number;
+}
+
+export default {
   name: 'App',
+  title: 'title',
   components: {
     CustomCard,
     Widget,
   },
   data() {
     return {
-      companies: [],
-      netIncome: []
+      companies: [] as Company[],
+      netIncome: [] as any[]
     }
   },
+  methods:{
 
+  },
   async created() {
-    this.companies = await stockService.companies;
+    this.companies = stockService.companies as Company[];
     this.companies.forEach(async abbr => {
       const data = await stockService.getRevenue(abbr.abbreviation,abbr.netIncomeRow);
       this.netIncome.push(data)
