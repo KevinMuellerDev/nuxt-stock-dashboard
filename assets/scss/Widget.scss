@@ -5,6 +5,9 @@
     padding: 20px 24px ;
     gap: 8px;
     border-radius: 16px;
+    user-select: none;
+    caret-color: none;
+
     .widg-title{
         display: flex;
         align-items: center;

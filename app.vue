@@ -6,7 +6,7 @@
     </div>
     <div class="context">
       <div class="ctx-top" ref="ctxTop">
-        <div class="cards" ref="cards" v-on:mousedown="grabbed($event)" v-on:mouseup="grabbable"
+        <div class="widgets" ref="widgets" v-on:mousedown="grabbed($event)" v-on:mouseup="grabbable"
              v-on:mousemove="moveWidgets($event)">
           <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
         </div>
@@ -51,7 +51,7 @@ export default {
       companies: [] as Company[],
       netIncome: [] as any[],
       slider: document.querySelector('.ctx-top') as HTMLElement,
-      cards: document.querySelector('.cards') as HTMLElement,
+      widgets: document.querySelector('.widgets') as HTMLElement,
       xPos: 0 as number,
       isClicked: false as boolean,
       dragSpeed: 0.7 as number
@@ -67,10 +67,10 @@ export default {
     grabbed(event: MouseEvent) {
       this.isClicked = true;
       const ctxTop = this.$refs.ctxTop as HTMLElement;
-      const cards = this.$refs.cards as HTMLElement;
+      const widgets = this.$refs.widgets as HTMLElement;
 
       const rect = ctxTop.getBoundingClientRect();
-      this.xPos = event.clientX - rect.left - cards.offsetLeft;
+      this.xPos = event.clientX - rect.left - widgets.offsetLeft;
       console.log(this.xPos);
 
       ctxTop.style.cursor = 'grabbing';
@@ -80,10 +80,10 @@ export default {
       if (!this.isClicked) return;
       event.preventDefault();
       const ctxTop = this.$refs.ctxTop as HTMLElement;
-      const cards = this.$refs.cards as HTMLElement;
+      const widgets = this.$refs.widgets as HTMLElement;
 
-      if (!cards) {
-        console.error('Cards element not found');
+      if (!widgets) {
+        console.error('widgets element not found');
         return;
       }
 
@@ -92,11 +92,11 @@ export default {
       console.log(newLeft);
 
       if (newLeft < -480) {
-        cards.style.left = `-480px`;
+        widgets.style.left = `-480px`;
       }else if(newLeft > -10){
-        cards.style.left = `-10px`
+        widgets.style.left = `-10px`
       } else{
-        cards.style.left = `${newLeft}px`;
+        widgets.style.left = `${newLeft}px`;
       }
     },
 
