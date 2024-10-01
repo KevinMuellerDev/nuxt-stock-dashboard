@@ -17,7 +17,7 @@ import {
     type ChartData,
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import { lineChartData, lineChartOptions } from '~/assets/config/lineChart';
+import { lineChartData,lineChartOptions } from '~/types/lineChart';
 
 ChartJS.register(
     CategoryScale,

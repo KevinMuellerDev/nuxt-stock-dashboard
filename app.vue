@@ -112,13 +112,12 @@ export default {
     });
   },
   mounted() {
-    // Füge die Klasse hinzu, um die Transition zu starten
     setTimeout(() => {
       const chartContainer = this.$refs.chartContainer as HTMLElement;
       if (chartContainer) {
         chartContainer.classList.add('show');
       }
-    }, 100); // Timeout um sicherzustellen, dass der Container gerendert ist
+    }, 100);
   }
 }
 

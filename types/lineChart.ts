@@ -1,6 +1,6 @@
 import { stockService } from '~/service/stockService';
 
-export function lineChartData(netIncome) {
+export function lineChartData(netIncome:any) {
     return {
         labels: stockService.order,
         datasets: [
