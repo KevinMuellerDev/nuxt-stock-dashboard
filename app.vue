@@ -7,11 +7,11 @@
     <div class="context">
       <div class="ctx-top" ref="ctxTop">
         <div class="widgets" ref="widgets" v-on:mousedown="grabbed($event)" v-on:mouseup="grabbable"
-             v-on:mousemove="moveWidgets($event)">
+          v-on:mousemove="moveWidgets($event)">
           <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
         </div>
       </div>
-      <div class="ctx-mid">
+      <div class="ctx-mid" ref="chartContainer">
         <CustomCard>
           <LineChart v-if="netIncome.length == 7" :netIncome=netIncome />
         </CustomCard>
@@ -71,7 +71,6 @@ export default {
 
       const rect = ctxTop.getBoundingClientRect();
       this.xPos = event.clientX - rect.left - widgets.offsetLeft;
-      console.log(this.xPos);
 
       ctxTop.style.cursor = 'grabbing';
     },
@@ -93,9 +92,9 @@ export default {
 
       if (newLeft < -480) {
         widgets.style.left = `-480px`;
-      }else if(newLeft > -10){
+      } else if (newLeft > -10) {
         widgets.style.left = `-10px`
-      } else{
+      } else {
         widgets.style.left = `${newLeft}px`;
       }
     },
@@ -111,6 +110,15 @@ export default {
       const data = await stockService.getRevenue(abbr.abbreviation, abbr.netIncomeRow);
       this.netIncome.push(data)
     });
+  },
+  mounted() {
+    // Füge die Klasse hinzu, um die Transition zu starten
+    setTimeout(() => {
+      const chartContainer = this.$refs.chartContainer as HTMLElement;
+      if (chartContainer) {
+        chartContainer.classList.add('show');
+      }
+    }, 100); // Timeout um sicherzustellen, dass der Container gerendert ist
   }
 }
 
