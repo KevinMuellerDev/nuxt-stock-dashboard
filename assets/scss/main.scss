@@ -71,14 +71,14 @@ html,body {
         Widget{
             pointer-events: none;
             user-select: none;
-            caret-color: none;
+            caret-color: transparent;
         }
     }
     .ctx-mid{
         display: flex;
         gap: 32px;
         width: 100%;
-        height: 352px;
+        max-height: 406px;
         opacity: 0;
         transform: scale(0.95);
         transition: opacity 2s ease-in-out, transform 1s ease-in-out;

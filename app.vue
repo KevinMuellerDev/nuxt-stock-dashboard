@@ -15,7 +15,9 @@
         <CustomCard>
           <LineChart v-if="netIncome.length == 7" :netIncome=netIncome />
         </CustomCard>
-        <CustomCard />
+        <CustomCard>
+          <PieChart v-if="revenueBreakdown.length == 7" :revBreakdown=revenueBreakdown />
+        </CustomCard>
       </div>
       <div class="ctx-bottom">
         <CustomCard />
@@ -50,6 +52,7 @@ export default {
     return {
       companies: [] as Company[],
       netIncome: [] as any[],
+      revenueBreakdown: [] as number[],
       slider: document.querySelector('.ctx-top') as HTMLElement,
       widgets: document.querySelector('.widgets') as HTMLElement,
       xPos: 0 as number,
@@ -88,7 +91,6 @@ export default {
 
       const rect = ctxTop.getBoundingClientRect();
       const newLeft = event.clientX - rect.left - this.xPos;
-      console.log(newLeft);
 
       if (newLeft < -480) {
         widgets.style.left = `-480px`;
@@ -105,11 +107,20 @@ export default {
     window.addEventListener("mouseup", () => {
       this.isClicked = false;
     });
+
     this.companies = stockService.companies as Company[];
-    this.companies.forEach(async abbr => {
+    
+    const netIncomePromises = this.companies.map(async (abbr) => {
       const data = await stockService.getRevenue(abbr.abbreviation, abbr.netIncomeRow);
-      this.netIncome.push(data)
+      return data;
     });
+    this.netIncome = await Promise.all(netIncomePromises);
+
+    const revenueBreakdownPromises = this.netIncome.map(async (element) =>{
+      const data = element.reduce((acc: number, num: number) => acc + num, 0);
+      return data
+    })
+    this.revenueBreakdown = await Promise.all(revenueBreakdownPromises);
   },
   mounted() {
     setTimeout(() => {

@@ -44,7 +44,7 @@ export function lineChartOptions() {
                 ticks: {
                     color: 'white',
                     font: {
-                        size: 8,
+                        size: 10,
                     },
                 },
                 grid: {

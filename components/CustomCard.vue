@@ -19,6 +19,6 @@ import { stockService } from '~/service/stockService';
   background: #011F35;
   padding: 20px 32px;
   border-radius: 16px;
-  width: calc(100% - 64px);
+  width:100%;
 }
 </style>

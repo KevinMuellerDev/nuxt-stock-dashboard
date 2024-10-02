@@ -1,6 +1,6 @@
 <template>
     <h2>Revenue last 3 Years</h2>
-    <Line :width="656" :height="270" :data="data" :options="options" />
+    <Line :width="714" :height="362" :data="data" :options="options" />
 </template>
 
 <script lang="ts">
@@ -31,7 +31,7 @@ ChartJS.register(
 
 
 export default {
-    name: 'App',
+    name: 'LineChart',
     components: {
         Line
     },

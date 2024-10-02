@@ -102,9 +102,7 @@ class StockService {
 
     async getRevenue(sheetName: string, index: number) {
         try {
-            const data = await this.fetchData(sheetName)
-            console.log(data[index]);
-            
+            const data = await this.fetchData(sheetName)            
             return this.order.map(key => data[index][key])
             
         } catch (error) {
@@ -112,6 +110,8 @@ class StockService {
             return [];
         }
     }
+
+    
 
 }
 
