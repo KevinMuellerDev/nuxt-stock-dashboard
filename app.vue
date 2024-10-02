@@ -51,8 +51,8 @@ export default {
   data() {
     return {
       companies: [] as Company[],
-      netIncome: [] as any[],
-      revenueBreakdown: [] as number[],
+      netIncome: [] as number[][],
+      revenueBreakdown: [] as string[],
       slider: document.querySelector('.ctx-top') as HTMLElement,
       widgets: document.querySelector('.widgets') as HTMLElement,
       xPos: 0 as number,
@@ -109,15 +109,19 @@ export default {
     });
 
     this.companies = stockService.companies as Company[];
-    
+
     const netIncomePromises = this.companies.map(async (abbr) => {
       const data = await stockService.getRevenue(abbr.abbreviation, abbr.netIncomeRow);
       return data;
     });
     this.netIncome = await Promise.all(netIncomePromises);
+    console.log(this.netIncome);
+    
+    
+    
 
     const revenueBreakdownPromises = this.netIncome.map(async (element) =>{
-      const data = element.reduce((acc: number, num: number) => acc + num, 0);
+      const data = element.reduce((acc: number, num: number) => acc + num, 0).toFixed(2);
       return data
     })
     this.revenueBreakdown = await Promise.all(revenueBreakdownPromises);

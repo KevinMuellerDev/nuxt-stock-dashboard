@@ -14,10 +14,10 @@
           <span v-else>Lädt...</span>
         </div>
         <div class="widg-rev-right">
-          <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
+          <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ? 'color: rgba(59, 167, 82, 1)' : 'color: rgba(196, 28, 28, 1)'"> {{
             revenueDiff }} </span>
           <span v-else>Lädt...</span>
-          <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ? 'color: green' : 'color: red'"> {{
+          <span v-if="this.revenue.length" v-bind:style="this.colorValue > 0 ?  'color: rgba(59, 167, 82, 1)' : 'color: rgba(196, 28, 28, 1)'"> {{
             grossMarginDiff }} </span>
           <span v-else>Lädt...</span>
         </div>

@@ -1,6 +1,6 @@
 <template>
     <h2>Revenue Breakdown</h2>
-    <Doughnut :width="140"  :data="data" :options="options" />
+    <Doughnut :data="data" :options="options" />
 </template>
 
 <script lang="ts">
@@ -8,7 +8,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, type ChartOptions, type 
 import { Doughnut } from 'vue-chartjs';
 import { pieChartOptions } from '~/types/pieChart';
 import { pieChartData } from '~/types/pieChart';
-ChartJS.register(ArcElement, Tooltip, Legend)
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 export default {
     name: 'PieChart',
     components: {
@@ -27,13 +29,19 @@ export default {
         }
     }
 }
-
 </script>
 
 <style scoped lang="scss">
-h2{
+h2 {
     margin: 0 0 -24px;
     color: white;
     font-weight: 500;
+}
+
+canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
 }
 </style>
