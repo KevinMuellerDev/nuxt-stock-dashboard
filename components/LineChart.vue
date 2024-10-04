@@ -48,7 +48,7 @@ export default {
         }
     },
     async created() {
-        console.log(this.netIncome);
+        
     }
 }
 
@@ -59,5 +59,8 @@ h2 {
     color: white;
     margin: 0 0 10px;
     font-weight: 500;
+}
+.chartjs-legend{
+    cursor: pointer;
 }
 </style>

@@ -7,7 +7,7 @@
     <div class="context">
       <div class="ctx-top" ref="ctxTop">
         <div class="widgets" ref="widgets" v-on:mousedown="grabbed($event)" v-on:mouseup="grabbable"
-          v-on:mousemove="moveWidgets($event)">
+             v-on:mousemove="moveWidgets($event)">
           <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
         </div>
       </div>
@@ -20,7 +20,9 @@
         </CustomCard>
       </div>
       <div class="ctx-bottom">
-        <CustomCard />
+        <CustomCard>
+          <BarChart  v-if="grossMarginYear.length == 7" :gross-margin=grossMarginYear />
+        </CustomCard>
         <CustomCard />
         <CustomCard />
       </div>
@@ -39,6 +41,7 @@ import { stockService } from './service/stockService';
 interface Company {
   abbreviation: string;
   netIncomeRow: number;
+  grossMarginRow: number;
 }
 
 export default {
@@ -53,6 +56,7 @@ export default {
       companies: [] as Company[],
       netIncome: [] as number[][],
       revenueBreakdown: [] as string[],
+      grossMarginYear: [] as number[],
       slider: document.querySelector('.ctx-top') as HTMLElement,
       widgets: document.querySelector('.widgets') as HTMLElement,
       xPos: 0 as number,
@@ -115,16 +119,22 @@ export default {
       return data;
     });
     this.netIncome = await Promise.all(netIncomePromises);
-    console.log(this.netIncome);
-    
-    
-    
 
-    const revenueBreakdownPromises = this.netIncome.map(async (element) =>{
+    const revenueBreakdownPromises = this.netIncome.map(async (element) => {
       const data = element.reduce((acc: number, num: number) => acc + num, 0).toFixed(2);
       return data
     })
     this.revenueBreakdown = await Promise.all(revenueBreakdownPromises);
+
+    const grossMarginPromises = this.companies.map(async (abbr) => {
+      const data = (await stockService.getRevenue(abbr.abbreviation, abbr.grossMarginRow)).slice(-4);
+      const processedData =Math.round( (data.reduce((acc: number, num: number) => acc + num, 0)*100)/100)
+      return processedData;
+    });
+    this.grossMarginYear = await Promise.all(grossMarginPromises)
+    console.log(this.grossMarginYear);
+    
+
   },
   mounted() {
     setTimeout(() => {

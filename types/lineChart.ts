@@ -27,6 +27,7 @@ export function lineChartOptions() {
                     color: 'white'
                 }
             },
+            datalabels:false
         },
         scales: {
             y: {

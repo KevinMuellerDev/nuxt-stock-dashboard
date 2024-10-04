@@ -8,3 +8,8 @@ declare module '~/types/pieChart' {
   export function pieChartOptions(): any;
   export function pieChartData(dataType: any): any;
 }
+
+declare module '~/types/barChart' {
+  export function barChartOptions(): any;
+  export function barChartData(dataType: any): any;
+}

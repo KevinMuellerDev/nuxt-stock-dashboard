@@ -1,5 +1,3 @@
-import { stockService } from '~/service/stockService';
-
 export function pieChartData(data: number[]) {
     return {
         labels: ['Apple', 'Amazon', 'Google', 'Meta', 'Microsoft', 'Nvidia', 'Tesla'],
@@ -32,6 +30,7 @@ export function pieChartOptions() {
                     color: 'white'
                 }
             },
+            datalabels:false
         },
         animation: {
             duration: 1000, // Dauer der Animation in ms
