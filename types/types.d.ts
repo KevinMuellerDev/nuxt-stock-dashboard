@@ -10,6 +10,6 @@ declare module '~/types/pieChart' {
 }
 
 declare module '~/types/barChart' {
-  export function barChartOptions(): any;
+  export function barChartOptions(percent?:boolean): any;
   export function barChartData(dataType: any): any;
 }

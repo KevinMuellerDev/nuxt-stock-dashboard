@@ -20,7 +20,7 @@ export function barChartData(data: number[]) {
     }
 }
 
-export function barChartOptions(){
+export function barChartOptions(percent:boolean){
     return{
         responsive: true,
         maintainAspectRatio: false,
@@ -32,7 +32,14 @@ export function barChartOptions(){
             datalabels: {
                 anchor: 'end',    // Die Position des Labels (am Ende des Balkens)
                 align: 'end',     // Die Ausrichtung des Labels
-                formatter: (value:number) => value,  // Formatierung des Labels (z.B. um den Wert als Zahl anzuzeigen)
+
+                formatter: (value:number) => {
+                    if (percent) {
+                        return`${value}%`
+                    }else{
+                        return value
+                    }
+                },  // Formatierung des Labels (z.B. um den Wert als Zahl anzuzeigen)
                 color: 'white',    // Farbe des Labels
                 font: {
                     weight: '400',
@@ -53,15 +60,16 @@ export function barChartOptions(){
                 }
             },
             x:{
-                max:400,
+                max: percent ? 30 : 120,
                 ticks:{
                     color:'white',
-                    stepSize:50
+                    stepSize:percent ? 'none' : 20
                 },
                 grid:{
                     color:'rgba(158, 158, 158, 1)'
                 }
             }
-        }
+        },
+
     }
 }

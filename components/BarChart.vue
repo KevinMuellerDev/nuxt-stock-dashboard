@@ -1,6 +1,7 @@
 <template>
-    <h2>Net Income TTM</h2>
-    <Bar :width="392" :data="data" :options="options" />
+    <h2 v-if="percent === true">Gross Margin in %LQ</h2>
+    <h2 v-else> Net Income TTM</h2>
+    <Bar :width="100" :data="data" :options="options" />
 </template>
 
 <script lang="ts">
@@ -26,16 +27,20 @@ export default {
     components: {
         Bar
     },
-    props:{
-        grossMargin:{
-            required:true,
-            type:Array
+    props: {
+        dataBar: {
+            required: true,
+            type: Array
+        },
+        percent: {
+            required: false,
+            type: Boolean
         }
     },
     data() {
         return {
-            data: barChartData(this.grossMargin) as ChartData<'bar'>,
-            options: barChartOptions() as ChartOptions<'bar'>
+            data: barChartData(this.dataBar) as ChartData<'bar'>,
+            options: this.percent ? barChartOptions(true) as ChartOptions<'bar'> : barChartOptions() as ChartOptions<'bar'>
         }
     }
 }
@@ -47,5 +52,9 @@ h2 {
     color: white;
     margin: 0 0 10px;
     font-weight: 500;
+}
+
+canvas {
+    padding-bottom: 16px
 }
 </style>

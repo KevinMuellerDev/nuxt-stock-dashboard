@@ -19,12 +19,16 @@
           <PieChart v-if="revenueBreakdown.length == 7" :revBreakdown=revenueBreakdown />
         </CustomCard>
       </div>
-      <div class="ctx-bottom">
+      <div class="ctx-bottom" ref="chartContainerBot">
         <CustomCard>
-          <BarChart  v-if="grossMarginYear.length == 7" :gross-margin=grossMarginYear />
+          <BarChart  v-if="netIncomeTTM.length == 7" :data-bar="netIncomeTTM" />
         </CustomCard>
-        <CustomCard />
-        <CustomCard />
+        <CustomCard>
+          <BarChart v-if="grossMarginQuart.length == 7" :data-bar="grossMarginQuart" :percent="true" />
+        </CustomCard>
+        <CustomCard>
+          
+        </CustomCard>
       </div>
     </div>
 
@@ -56,7 +60,8 @@ export default {
       companies: [] as Company[],
       netIncome: [] as number[][],
       revenueBreakdown: [] as string[],
-      grossMarginYear: [] as number[],
+      netIncomeTTM: [] as number[],
+      grossMarginQuart: [] as number[],
       slider: document.querySelector('.ctx-top') as HTMLElement,
       widgets: document.querySelector('.widgets') as HTMLElement,
       xPos: 0 as number,
@@ -114,33 +119,46 @@ export default {
 
     this.companies = stockService.companies as Company[];
 
+    // Retrieving Net income data
     const netIncomePromises = this.companies.map(async (abbr) => {
       const data = await stockService.getRevenue(abbr.abbreviation, abbr.netIncomeRow);
       return data;
     });
     this.netIncome = await Promise.all(netIncomePromises);
 
+    // Retrieving Revenue breakdown data
     const revenueBreakdownPromises = this.netIncome.map(async (element) => {
       const data = element.reduce((acc: number, num: number) => acc + num, 0).toFixed(2);
       return data
     })
     this.revenueBreakdown = await Promise.all(revenueBreakdownPromises);
 
-    const grossMarginPromises = this.companies.map(async (abbr) => {
-      const data = (await stockService.getRevenue(abbr.abbreviation, abbr.grossMarginRow)).slice(-4);
+    // Retrieving Net income TTM data
+    const netIncomeTTMPromises = this.companies.map(async (abbr) => {
+      const data = (await stockService.getRevenue(abbr.abbreviation, abbr.netIncomeRow)).slice(-4);
       const processedData =Math.round( (data.reduce((acc: number, num: number) => acc + num, 0)*100)/100)
       return processedData;
     });
-    this.grossMarginYear = await Promise.all(grossMarginPromises)
-    console.log(this.grossMarginYear);
-    
+    this.netIncomeTTM = await Promise.all(netIncomeTTMPromises);
+
+    // Retrieving Gross Margin from last Quartal
+
+    const grossMarginQuartPromises = this.companies.map(async (abbr) =>{
+      const data = (await stockService.getRevenue(abbr.abbreviation, abbr.netIncomeRow)).slice(-1);
+      const processedData =Math.round( (data.reduce((acc: number, num: number) => acc + num, 0)*100)/100)
+      return processedData
+    })
+    this.grossMarginQuart = await Promise.all(grossMarginQuartPromises);
+
 
   },
   mounted() {
     setTimeout(() => {
       const chartContainer = this.$refs.chartContainer as HTMLElement;
-      if (chartContainer) {
+      const chartContainerBot = this.$refs.chartContainerBot as HTMLElement;
+      if (chartContainer && chartContainerBot) {
         chartContainer.classList.add('show');
+        chartContainerBot.classList.add('show');
       }
     }, 100);
   }

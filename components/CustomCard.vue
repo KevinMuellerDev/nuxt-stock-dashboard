@@ -17,7 +17,7 @@ import { stockService } from '~/service/stockService';
 .card {
   position: relative;
   background: #011F35;
-  padding: 20px 32px;
+  padding: 32px;
   border-radius: 16px;
   width:100%;
 }

@@ -9,7 +9,7 @@ html,body {
     background-position: center;
     background-attachment: fixed;
     height: inherit;
-    height: calc(100vh + 155px);
+    height: calc(100vh + 255px);
 }
 
 .head {
@@ -94,6 +94,14 @@ html,body {
         gap: 32px;
         width: 100%;
         height: 296px;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 2.4s ease-in-out, transform 1.4s ease-in-out;
+    }
+
+    .ctx-bottom.show{
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
