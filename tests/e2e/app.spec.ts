@@ -1,11 +1,12 @@
-import { resolve, join } from 'path'
+import { resolve, join, dirname } from 'path'
 import { test, expect } from '@playwright/test'
-const ids:string[] = [
-    'lc',
-    'dc'
-]
+import { fileURLToPath } from 'url'
 
-const ROOT_PATH = resolve('tests/screenshots')
+const ids:string[] = ['lc','dc']
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const ROOT_PATH = resolve(__dirname,'screenshots');
 
 
 test('test title of the app', async ({ page, baseURL }) => {
@@ -20,7 +21,7 @@ test('test if all widgets are rendered', async ({ page, baseURL }) => {
 
 })
 
-test('test if charts are loaded', async ({ page, baseURL }) => {
+test('test if charts are loaded with content', async ({ page, baseURL }) => {
     await page.goto(baseURL + '/');
     await expect(page.locator('canvas#lc')).toBeVisible();
     await expect(page.locator('canvas#dc')).toBeVisible();
@@ -34,7 +35,7 @@ test('test if charts are loaded', async ({ page, baseURL }) => {
             if (!context)
                 return false;
             const pixelData = context.getImageData(0, 0, canvasElement.width, canvasElement.height).data;
-            return Array.from(pixelData).some(channel => channel !== 0); // true, wenn es Pixel gibt, die nicht transparent sind
+            return Array.from(pixelData).some(channel => channel !== 0); 
         }, element);
 
         await expect(isCanvasNotEmpty).toBe(true);
