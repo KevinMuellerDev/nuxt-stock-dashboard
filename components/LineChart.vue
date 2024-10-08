@@ -1,6 +1,6 @@
 <template>
     <h2>Revenue last 3 Years</h2>
-    <Line :width="714" :height="362" :data="data" :options="options" />
+    <Line id="lc" :width="714" :height="362" :data="data" :options="options" />
 </template>
 
 <script lang="ts">

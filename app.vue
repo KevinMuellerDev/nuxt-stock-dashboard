@@ -6,7 +6,7 @@
     </div>
     <div class="context">
       <div class="ctx-top" ref="ctxTop">
-        <div class="widgets" ref="widgets" v-on:mousedown="grabbed($event)" v-on:mouseup="grabbable"
+        <div id="widget-list" class="widgets" ref="widgets" v-on:mousedown="grabbed($event)" v-on:mouseup="grabbable"
              v-on:mousemove="moveWidgets($event)">
           <Widget v-for="companie in companies" v-bind:companieData="companie"></Widget>
         </div>
@@ -27,7 +27,7 @@
           <BarChart v-if="grossMarginQuart.length == 7" :data-bar="grossMarginQuart" :percent="true" />
         </CustomCard>
         <CustomCard>
-          
+
         </CustomCard>
       </div>
     </div>

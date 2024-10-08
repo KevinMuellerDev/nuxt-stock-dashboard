@@ -1,6 +1,6 @@
 <template>
     <h2>Revenue Breakdown</h2>
-    <Doughnut :data="data" :options="options" />
+    <Doughnut id="dc" :data="data" :options="options" />
 </template>
 
 <script lang="ts">
